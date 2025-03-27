@@ -25,7 +25,7 @@ namespace GrpcServer.Services
                     output.FirstName = "Jane";
                     output.LastName = "Doe";
                     break;
-                
+
                 default:
                     output.FirstName = "Greg";
                     output.LastName = "Thomas";
@@ -34,5 +34,43 @@ namespace GrpcServer.Services
 
             return Task.FromResult(output);
         }
+
+        public override async Task GetNewCustomers(NewCustomerRequest request, IServerStreamWriter<CustomerModel> responseStream, ServerCallContext context)
+        {
+            List<CustomerModel> customers = new List<CustomerModel>
+            {
+                        new CustomerModel
+                        {
+                            FirstName = "João",
+                            LastName = "Silva",
+                            EmailAdress = "joao.silva@email.com",
+                            IsAlive = true,
+                            Age = 30
+                        },
+                        new CustomerModel
+                        {
+                            FirstName = "Maria",
+                            LastName = "Oliveira",
+                            EmailAdress = "maria.oliveira@email.com",
+                            IsAlive = true,
+                            Age = 25
+                        },
+                        new CustomerModel
+                        {
+                            FirstName = "Carlos",
+                            LastName = "Santos",
+                            EmailAdress = "carlos.santos@email.com",
+                            IsAlive = false,
+                            Age = 60
+                        }
+            };
+
+            foreach (var item in customers)
+            {
+                await responseStream.WriteAsync(item);
+                await Task.Delay(500);
+            }
+        }
+
     }
 }

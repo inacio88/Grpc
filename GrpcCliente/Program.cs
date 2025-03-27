@@ -16,11 +16,11 @@ Console.WriteLine("Inicio");
 // System.Console.WriteLine(reply.Message);
 
 
-var channel = GrpcChannel.ForAddress("http://localhost:5227");
-var CustomerClient = new Customer.CustomerClient(channel);
-var clientRequest = new CustomerLookupModel { UserId = 5};
-var customer = await CustomerClient.GetCustomerInfoAsync(clientRequest);
+// var channel = GrpcChannel.ForAddress("http://localhost:5227");
+// var CustomerClient = new Customer.CustomerClient(channel);
+// var clientRequest = new CustomerLookupModel { UserId = 5};
+// var customer = await CustomerClient.GetCustomerInfoAsync(clientRequest);
 
-System.Console.WriteLine(customer.FirstName + " " + customer.LastName);
+// System.Console.WriteLine(customer.FirstName + " " + customer.LastName);
 
 Console.WriteLine("Fim");
